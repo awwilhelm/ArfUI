@@ -32,12 +32,23 @@ public class EvidencePage : MonoBehaviour {
     public void ChangeEvidenceButton(int intButton)
     {
         evidenceOptions but = (evidenceOptions)intButton;
+        
         if(evidenceActive != evidenceOptions.None)
         {
-            GetGameObjectButton(evidenceActive).SetActive(false);
+            if (evidenceActive == but)
+            {
+                GetGameObjectButton(but).SetActive(!(GetGameObjectButton(evidenceActive).activeInHierarchy));
+            }
+            else
+            {
+                GetGameObjectButton(evidenceActive).SetActive(false);
+                GetGameObjectButton(but).SetActive(true);
+            }
+        } else
+        {
+            GetGameObjectButton(but).SetActive(true);
         }
 
-        GetGameObjectButton(but).SetActive(true);
 
         evidenceActive = but;
     }
